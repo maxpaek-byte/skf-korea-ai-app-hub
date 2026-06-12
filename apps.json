@@ -4,16 +4,28 @@
     "title": "SKF Korea AI App Hub",
     "description": "SKF Korea 사내 AI 앱 허브",
     "last_updated": "2026-06-12",
-    "total_apps": 10,
+    "total_apps": 11,
     "maintainer": {
       "team": "DX",
       "company": "SKF Korea"
     }
   },
-
   "vocabularies": {
-    "status": ["Live", "Beta", "Alpha", "Coming Soon", "Sunset", "Deprecated"],
-    "owner": ["Korea", "CNEA", "Group", "Global", "External Partner"],
+    "status": [
+      "Live",
+      "Beta",
+      "Alpha",
+      "Coming Soon",
+      "Sunset",
+      "Deprecated"
+    ],
+    "owner": [
+      "Korea",
+      "CNEA",
+      "Group",
+      "Global",
+      "External Partner"
+    ],
     "category": [
       "Operation Automation",
       "Sales Support",
@@ -30,20 +42,37 @@
       "Power Platform",
       "Custom"
     ],
-    "access": ["Public", "M365 SSO", "Internal Network", "Restricted"],
-    "data_classification": ["Public", "Internal", "Confidential", "Restricted"],
-    "governance_status": ["Approved", "In Review", "Not Required", "Pending"]
+    "access": [
+      "Public",
+      "M365 SSO",
+      "Internal Network",
+      "Restricted"
+    ],
+    "data_classification": [
+      "Public",
+      "Internal",
+      "Confidential",
+      "Restricted"
+    ],
+    "governance_status": [
+      "Approved",
+      "In Review",
+      "Not Required",
+      "Pending"
+    ],
+    "featured": [
+      "Y",
+      "N"
+    ]
   },
-
   "category_labels": {
     "Operation Automation": "운영 자동화",
-    "Sales Support":        "세일즈 지원",
-    "Productivity":         "생산성",
-    "AI Resource":          "AI 리소스",
-    "Education / HR":       "교육 / HR",
-    "Insight & Analytics":  "인사이트 / 분석"
+    "Sales Support": "세일즈 지원",
+    "Productivity": "생산성",
+    "AI Resource": "AI 리소스",
+    "Education / HR": "교육 / HR",
+    "Insight & Analytics": "인사이트 / 분석"
   },
-
   "apps": [
     {
       "id": "air-freight-calculator",
@@ -54,10 +83,23 @@
       "category": "Operation Automation",
       "status": "Live",
       "owner": "Korea",
-      "contact": {"name": "백승규", "department": "DX", "email": null},
+      "contact": {
+        "name": "백승규",
+        "department": "DX",
+        "email": null
+      },
       "url": "https://maxpaek-byte.github.io/air_freight_calculator/",
-      "target_users": ["영업", "물류"],
-      "tags": ["항공운임", "DHL", "수입", "견적"],
+      "target_users": [
+        "CX",
+        "SCE",
+        "Sales"
+      ],
+      "tags": [
+        "항공운임",
+        "DHL",
+        "수입",
+        "견적"
+      ],
       "platform": "GitHub Pages",
       "access": "Public",
       "last_updated": "2026-04-20",
@@ -67,7 +109,10 @@
       "released": "2024-11",
       "use_cases": [],
       "demo_video_url": null,
-      "data_sources": ["환율 데이터", "DHL 운임표"],
+      "data_sources": [
+        "환율 데이터",
+        "DHL 운임표"
+      ],
       "data_classification": "Internal",
       "governance_status": "Approved",
       "feedback_channel": null,
@@ -82,12 +127,23 @@
       "tagline": "Packing List PDF를 Delivery Address별로 자동 분리",
       "description": "Packing List PDF를 Delivery Address별로 분류하여 PDF로 저장합니다.",
       "category": "Operation Automation",
-      "status": "Live",
+      "status": "Beta",
       "owner": "Korea",
-      "contact": {"name": "백승규", "department": "DX", "email": null},
+      "contact": {
+        "name": "백승규",
+        "department": "DX",
+        "email": null
+      },
       "url": "https://maxpaek-byte.github.io/packing-list-splitter/",
-      "target_users": ["물류", "출하"],
-      "tags": ["PDF", "Packing List", "출하"],
+      "target_users": [
+        "CX",
+        "SCE"
+      ],
+      "tags": [
+        "PDF",
+        "Packing List",
+        "출하"
+      ],
       "platform": "GitHub Pages",
       "access": "Public",
       "last_updated": "2026-05-30",
@@ -97,7 +153,9 @@
       "released": "2026-05",
       "use_cases": [],
       "demo_video_url": null,
-      "data_sources": ["사용자 업로드 PDF"],
+      "data_sources": [
+        "사용자 업로드 PDF"
+      ],
       "data_classification": "Internal",
       "governance_status": "Approved",
       "feedback_channel": null,
@@ -114,10 +172,21 @@
       "category": "Sales Support",
       "status": "Live",
       "owner": "Korea",
-      "contact": {"name": "백승규", "department": "DX", "email": null},
+      "contact": {
+        "name": "백승규",
+        "department": "DX",
+        "email": null
+      },
       "url": "https://maxpaek-byte.github.io/CO2_calculator2/",
-      "target_users": ["영업", "BaaS팀"],
-      "tags": ["RecondOil", "CO2", "ESG", "탄소중립"],
+      "target_users": [
+        "Sales"
+      ],
+      "tags": [
+        "RecondOil",
+        "CO2",
+        "ESG",
+        "탄소중립"
+      ],
       "platform": "GitHub Pages",
       "access": "Public",
       "last_updated": "2026-03-15",
@@ -127,7 +196,9 @@
       "released": "2024-09",
       "use_cases": [],
       "demo_video_url": null,
-      "data_sources": ["RecondOil 효율 계수"],
+      "data_sources": [
+        "RecondOil 효율 계수"
+      ],
       "data_classification": "Internal",
       "governance_status": "Approved",
       "feedback_channel": null,
@@ -143,11 +214,23 @@
       "description": "베어링·씰·윤활 등 SKF 제품 정보를 즉시 질의응답. 영업·고객 응대용 사내 챗봇.",
       "category": "Productivity",
       "status": "Live",
-      "owner": "Korea",
-      "contact": {"name": "TBD", "department": "DX", "email": null},
+      "owner": "Group",
+      "contact": {
+        "name": "Group",
+        "department": "DX",
+        "email": null
+      },
       "url": "https://m365.cloud.microsoft/chat/?titleId=T_10c79e2e-b769-b0e5-2e25-bf4e798d2f01",
-      "target_users": ["영업", "CS"],
-      "tags": ["베어링", "씰", "윤활", "Copilot"],
+      "target_users": [
+        "CX",
+        "Sales"
+      ],
+      "tags": [
+        "베어링",
+        "씰",
+        "윤활",
+        "Copilot"
+      ],
       "platform": "M365 Copilot Studio",
       "access": "M365 SSO",
       "last_updated": "2026-05-01",
@@ -157,7 +240,9 @@
       "released": "2025-08",
       "use_cases": [],
       "demo_video_url": null,
-      "data_sources": ["SKF 글로벌 제품 카탈로그"],
+      "data_sources": [
+        "SKF 글로벌 제품 카탈로그"
+      ],
       "data_classification": "Internal",
       "governance_status": "Approved",
       "feedback_channel": null,
@@ -173,11 +258,23 @@
       "description": "고객 미팅·제안·견적 단계의 영업 워크플로우를 지원. 인사이트와 제안 문구를 즉시 제공.",
       "category": "Sales Support",
       "status": "Live",
-      "owner": "Korea",
-      "contact": {"name": "TBD", "department": "Sales", "email": null},
+      "owner": "Group",
+      "contact": {
+        "name": "Group",
+        "department": "Group",
+        "email": null
+      },
       "url": "https://m365.cloud.microsoft/chat/?titleId=T_3dc94736-8c8b-0288-60f1-c12b5673d37d",
-      "target_users": ["영업"],
-      "tags": ["영업", "제안서", "견적", "Copilot"],
+      "target_users": [
+        "Sales",
+        "CX"
+      ],
+      "tags": [
+        "영업",
+        "제안서",
+        "견적",
+        "Copilot"
+      ],
       "platform": "M365 Copilot Studio",
       "access": "M365 SSO",
       "last_updated": "2026-04-10",
@@ -203,11 +300,21 @@
       "description": "SKF 사내에서 보안 걱정 없이 사용할 수 있는 AI 도구로, 문서 번역과 PDF·이미지 워드 변환에 강점이 있습니다.",
       "category": "AI Resource",
       "status": "Live",
-      "owner": "Group",
-      "contact": {"name": "TBD", "department": "IT", "email": null},
+      "owner": "CNEA",
+      "contact": {
+        "name": "CNEA",
+        "department": "CNEA",
+        "email": null
+      },
       "url": "https://copilot.skf4u.com",
-      "target_users": ["전 임직원"],
-      "tags": ["번역", "문서변환", "보안"],
+      "target_users": [
+        "All"
+      ],
+      "tags": [
+        "번역",
+        "문서변환",
+        "보안"
+      ],
       "platform": "Internal Web",
       "access": "Internal Network",
       "last_updated": null,
@@ -234,12 +341,24 @@
       "category": "Productivity",
       "status": "Live",
       "owner": "Group",
-      "contact": {"name": "TBD", "department": "IT", "email": null},
+      "contact": {
+        "name": "Group",
+        "department": "Group",
+        "email": null
+      },
       "url": "https://teams.microsoft.com/l/app/98911f26-054b-423a-b646-cd870273e084?source=app-profile-card&threadId=19%3A9ccb261d-6545-4dec-9cf7-23ff461b6729_b76eb544-7198-46ae-82f9-ba5b7a89698d%40unq.gbl.spaces",
-      "target_users": ["영업", "CS"],
-      "tags": ["PS Price", "재고", "납기", "Teams"],
-      "platform": "Custom",
-      "access": "M365 SSO",
+      "target_users": [
+        "Sales",
+        "CX"
+      ],
+      "tags": [
+        "PS Price",
+        "재고",
+        "납기",
+        "Teams"
+      ],
+      "platform": "Internal Web",
+      "access": "Internal Network",
       "last_updated": null,
       "version": null,
       "icon": "speech-bubble",
@@ -262,12 +381,22 @@
       "tagline": "12pt 가독성 기준 인포그래픽 프롬프트 자동 생성",
       "description": "제안서·보고서용 인포그래픽 제작 프롬프트를 자동 생성. 12pt 가독성 기준 준수.",
       "category": "Sales Support",
-      "status": "Live",
+      "status": "Beta",
       "owner": "Korea",
-      "contact": {"name": "백승규", "department": "DX", "email": null},
+      "contact": {
+        "name": "백승규",
+        "department": "DX",
+        "email": null
+      },
       "url": "https://maxpaek-byte.github.io/Infographic/",
-      "target_users": ["전 임직원", "제안서 작성자"],
-      "tags": ["인포그래픽", "제안서", "프롬프트"],
+      "target_users": [
+        "Sales"
+      ],
+      "tags": [
+        "인포그래픽",
+        "제안서",
+        "프롬프트"
+      ],
       "platform": "GitHub Pages",
       "access": "Public",
       "last_updated": "2026-05-15",
@@ -277,7 +406,9 @@
       "released": "2025-12",
       "use_cases": [],
       "demo_video_url": null,
-      "data_sources": ["SKF 디자인 가이드"],
+      "data_sources": [
+        "SKF 디자인 가이드"
+      ],
       "data_classification": "Internal",
       "governance_status": "Approved",
       "feedback_channel": null,
@@ -294,10 +425,20 @@
       "category": "AI Resource",
       "status": "Live",
       "owner": "Korea",
-      "contact": {"name": "백승규", "department": "DX", "email": null},
+      "contact": {
+        "name": "백승규",
+        "department": "DX",
+        "email": null
+      },
       "url": "https://maxpaek-byte.github.io/ai-bookmarks/",
-      "target_users": ["전 임직원"],
-      "tags": ["AI도구", "큐레이션", "북마크"],
+      "target_users": [
+        "All"
+      ],
+      "tags": [
+        "AI도구",
+        "큐레이션",
+        "북마크"
+      ],
       "platform": "GitHub Pages",
       "access": "Public",
       "last_updated": "2026-05-25",
@@ -324,11 +465,24 @@
       "category": "Productivity",
       "status": "Live",
       "owner": "Group",
-      "contact": {"name": "TBD", "department": "Data", "email": null},
+      "contact": {
+        "name": "Group",
+        "department": "Group",
+        "email": null
+      },
       "url": "https://ai.snowflake.com/skf/abskf01/#/ai",
-      "target_users": ["분석가", "임원"],
-      "tags": ["Snowflake", "분석", "PBI", "데이터"],
-      "platform": "Custom",
+      "target_users": [
+        "Controlling",
+        "Sales",
+        "CX"
+      ],
+      "tags": [
+        "Snowflake",
+        "분석",
+        "PBI",
+        "데이터"
+      ],
+      "platform": "Internal Web",
       "access": "Restricted",
       "last_updated": null,
       "version": null,
@@ -337,7 +491,9 @@
       "released": null,
       "use_cases": [],
       "demo_video_url": null,
-      "data_sources": ["Snowflake Data Warehouse"],
+      "data_sources": [
+        "Snowflake Data Warehouse"
+      ],
       "data_classification": "Confidential",
       "governance_status": "Approved",
       "feedback_channel": null,
@@ -347,6 +503,51 @@
         "text": "ServiceNow 신청 링크",
         "url": "https://skfprod.service-now.com/sp"
       }
+    },
+    {
+      "id": "skf-esg-assistant",
+      "name": "SKF ESG Assistant",
+      "name_en": "SKF ESG Assistant",
+      "tagline": "지속가능 관련 데이터 제공",
+      "description": "ESG 어시스턴트는 SKF가 투명하고 신뢰할 수 있는 지속가능성 데이터를 제공할 수 있도록 지원함으로써, 고객이 재활용 가능성, 배출량, 인권과 관련된 핵심 질문에 답할 수 있도록 돕고, 가치 사슬 전반에 걸쳐 신뢰를 강화합니다.",
+      "category": "Operation Automation",
+      "status": "Beta",
+      "owner": "Group",
+      "contact": {
+        "name": "Group",
+        "department": "Group",
+        "email": null
+      },
+      "url": "https://sustainability-beta-web.azurewebsites.net/",
+      "target_users": [
+        "Sales",
+        "CX",
+        "ESG"
+      ],
+      "tags": [
+        "ESG",
+        "Sustainable",
+        "설문",
+        "조사"
+      ],
+      "platform": "Internal Web",
+      "access": "Internal Network",
+      "last_updated": "2026-06-09",
+      "version": "0.1.0",
+      "icon": "leaf",
+      "documentation_url": null,
+      "released": "2026-06-09",
+      "use_cases": [],
+      "demo_video_url": null,
+      "data_sources": [
+        "Annual Report 2025\nAnnual Report 2024\nDecarbonizing Positioning Paper\nCarbon Disclosure Project (CDP) responses\nGroup EHS Policy\nConflict Minerals Due Diligence Report\nSustainability Standard for Suppliers\nCode of Conduct\nCode of Conduct for Suppliers\nRecycling Guidelines"
+      ],
+      "data_classification": "Public",
+      "governance_status": "Not Required",
+      "feedback_channel": null,
+      "usage_stats": null,
+      "featured": false,
+      "extra_action": null
     }
   ]
 }
