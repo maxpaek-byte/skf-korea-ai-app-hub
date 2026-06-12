@@ -27,6 +27,8 @@
   --blue-bg:       #F0F6FC;
   --blue-bd:       #79C0FF;
   --red:           #D1242F;
+  --red-bg:        #FFEBE9;
+  --red-bd:        #FF8182;
   --font:          'IBM Plex Sans KR', sans-serif;
   --mono:          'IBM Plex Mono', monospace;
   --radius:        8px;
@@ -397,6 +399,45 @@ body {
   display: none;
 }
 
+/* Loading skeleton */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 900px) { .skeleton-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+@media (max-width: 600px) { .skeleton-grid { grid-template-columns: 1fr; gap: 16px; } }
+.skeleton-card {
+  height: 220px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(90deg, var(--surface) 0%, var(--bg-dark) 50%, var(--surface) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite ease-in-out;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Error box */
+.error-box {
+  border: 1.5px solid var(--red-bd);
+  background: var(--red-bg);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  color: var(--red);
+}
+.error-box h3 { font-size: 14px; margin-bottom: 8px; }
+.error-box p  { font-size: 13px; line-height: 1.7; color: var(--text); }
+.error-box code {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: rgba(255,255,255,.6);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
 /* Section heading (optional, used between groups) */
 .section-divider {
   margin: 36px 0 20px;
@@ -433,7 +474,7 @@ body {
       <div class="app-sub">SKF Korea · BaaS / DX Initiative · Agent Hub</div>
     </div>
   </div>
-  <div class="app-badge">v2.0 · 10 Agents</div>
+  <div class="app-badge" id="appBadge">Loading…</div>
 </header>
 
 <div class="app-body">
@@ -448,255 +489,30 @@ body {
         생산성 도구부터 영업 지원, 운영 자동화까지 한 곳에서 만나세요.
       </p>
     </div>
-    <div class="stats">
-        <div class="stat">
-        <div class="stat-num">10</div>
-        <div class="stat-label">Total</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">9</div>
-        <div class="stat-label">Live</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">2</div>
-        <div class="stat-label">M365</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">1</div>
-        <div class="stat-label">Soon</div>
-      </div>
+    <div class="stats" id="statsBar">
+      <div class="stat"><div class="stat-num">—</div><div class="stat-label">Total</div></div>
+      <div class="stat"><div class="stat-num">—</div><div class="stat-label">Live</div></div>
+      <div class="stat"><div class="stat-num">—</div><div class="stat-label">M365</div></div>
+      <div class="stat"><div class="stat-num">—</div><div class="stat-label">Soon</div></div>
     </div>
   </section>
 
   <!-- Filter -->
-  <div class="filter-bar">
+  <div class="filter-bar" id="filterBar">
     <span class="filter-label">Filter</span>
-    <div class="filter-chip active" data-filter="all">전체 <span class="count">10</span></div>
-    <div class="filter-chip" data-filter="ops">운영 자동화 <span class="count">2</span></div>
-    <div class="filter-chip" data-filter="sales">세일즈 지원 <span class="count">3</span></div>
-    <div class="filter-chip" data-filter="content">생산성 <span class="count">3</span></div>
-    <div class="filter-chip" data-filter="resource">AI 리소스 <span class="count">2</span></div>
+    <!-- chips injected by JS -->
   </div>
 
-  <!-- Agent grid -->
-  <div class="agent-grid" id="agentGrid">
-
-    <!-- 1. 항공요금 자동 계산기 -->
-    <a class="agent-card" data-cat="ops" href="https://maxpaek-byte.github.io/air_freight_calculator/" target="_blank" rel="noopener">
-      <div class="card-head">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 12L22 5L15 22L12 14L4 11L2 12Z" stroke-linejoin="round"/>
-            <path d="M12 14L19 7" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <span class="card-status status-live">Live</span>
-      </div>
-      <div class="card-title">항공요금 자동 계산기</div>
-      <div class="card-desc">SKF 긴급 항공 수입 시 운임을 자동 산출. 부피·중량·환율을 즉시 반영합니다.</div>
-      <div class="card-foot">
-        <span class="card-tag">Ops Automation</span>
-        <span class="card-arrow">Open
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- 2. Packing List 자동 분류기 -->
-    <a class="agent-card" data-cat="ops" href="https://maxpaek-byte.github.io/packing-list-splitter/" target="_blank" rel="noopener">
-      <div class="card-head">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 3H6C5 3 4 4 4 5V19C4 20 5 21 6 21H18C19 21 20 20 20 19V9L14 3Z" stroke-linejoin="round"/>
-            <path d="M14 3V9H20" stroke-linejoin="round"/>
-            <path d="M8 13H16M8 17H13" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <span class="card-status status-live">Live</span>
-      </div>
-      <div class="card-title">Packing List 자동 분류기</div>
-      <div class="card-desc">Packing List PDF를 Delivery Address별로 분류하여 PDF로 저장합니다.</div>
-      <div class="card-foot">
-        <span class="card-tag">Ops Automation</span>
-        <span class="card-arrow">Open
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- 3. RO Box 탄소 절감 자동 계산기 -->
-    <a class="agent-card" data-cat="sales" href="https://maxpaek-byte.github.io/CO2_calculator2/" target="_blank" rel="noopener">
-      <div class="card-head">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 3C8 7 5 10 5 14C5 18 8 21 12 21C16 21 19 18 19 14C19 10 16 7 12 3Z" stroke-linejoin="round"/>
-            <path d="M12 21V11M12 14L9 12M12 17L15 15" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <span class="card-status status-live">Live</span>
-      </div>
-      <div class="card-title">RO Box 탄소 절감 계산기</div>
-      <div class="card-desc">SKF RecondOil Box 도입에 따른 CO₂ 절감량을 즉시 산출. 정부 지원사업 제안에 활용.</div>
-      <div class="card-foot">
-        <span class="card-tag">Sales Support</span>
-        <span class="card-arrow">Open
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- 4. SKF Product Assistant 2.0 -->
-    <a class="agent-card" data-cat="content" href="https://m365.cloud.microsoft/chat/?titleId=T_10c79e2e-b769-b0e5-2e25-bf4e798d2f01" target="_blank" rel="noopener">
-      <div class="card-head">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21 12C21 16 17 19 12 19C10.8 19 9.6 18.8 8.6 18.5L4 20L5.5 16C4.6 14.8 4 13.5 4 12C4 8 8 5 12 5C17 5 21 8 21 12Z" stroke-linejoin="round"/>
-            <circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/>
-            <circle cx="13" cy="12" r="1" fill="currentColor" stroke="none"/>
-            <circle cx="17" cy="12" r="1" fill="currentColor" stroke="none"/>
-          </svg>
-        </div>
-        <span class="card-status status-m365">M365</span>
-      </div>
-      <div class="card-title">SKF Product Assistant 2.0</div>
-      <div class="card-desc">베어링·씰·윤활 등 SKF 제품 정보를 즉시 질의응답. 영업·고객 응대용 사내 챗봇.</div>
-      <div class="card-foot">
-        <span class="card-tag">Productivity</span>
-        <span class="card-arrow">Open
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- 5. SKF AI Sales Assistant -->
-    <a class="agent-card" data-cat="sales" href="https://m365.cloud.microsoft/chat/?titleId=T_3dc94736-8c8b-0288-60f1-c12b5673d37d" target="_blank" rel="noopener">
-      <div class="card-head">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 20H20M6 16V10M10 16V6M14 16V12M18 16V8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <span class="card-status status-m365">M365</span>
-      </div>
-      <div class="card-title">SKF AI Sales Assistant</div>
-      <div class="card-desc">고객 미팅·제안·견적 단계의 영업 워크플로우를 지원. 인사이트와 제안 문구를 즉시 제공.</div>
-      <div class="card-foot">
-        <span class="card-tag">Sales Support</span>
-        <span class="card-arrow">Open
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- 6. SKF Copilot -->
-    <a class="agent-card" data-cat="resource" href="https://copilot.skf4u.com" target="_blank" rel="noopener">
-      <div class="card-head">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 5H20V19H4V5Z" stroke-linejoin="round"/>
-            <path d="M8 8H16M8 12H16M8 16H12" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <span class="card-status status-live">Live</span>
-      </div>
-      <div class="card-title">SKF Copilot</div>
-      <div class="card-desc">SKF 사내에서 보안 걱정 없이 사용할 수 있는 AI 도구로, 문서 번역과 PDF·이미지 워드 변환에 강점이 있습니다.</div>
-      <div class="card-foot">
-        <span class="card-tag">AI Resource</span>
-        <span class="card-arrow">Open
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- 7. SKF MPT ChatBot -->
-    <a class="agent-card" data-cat="content" href="https://teams.microsoft.com/l/app/98911f26-054b-423a-b646-cd870273e084?source=app-profile-card&threadId=19%3A9ccb261d-6545-4dec-9cf7-23ff461b6729_b76eb544-7198-46ae-82f9-ba5b7a89698d%40unq.gbl.spaces" target="_blank" rel="noopener">
-      <div class="card-head">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 4H20V16H12L8 20V16H4V4Z" stroke-linejoin="round"/>
-            <path d="M8 10H16M8 14H13" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <span class="card-status status-live">Live</span>
-      </div>
-      <div class="card-title">SKF MPT ChatBot</div>
-      <div class="card-desc">키워드로 PS Price·재고·납기(창고별 조회 포함)와 제품 정보를 간단히 검색할 수 있는 도구입니다.</div>
-      <div class="card-foot">
-        <span class="card-tag">Productivity</span>
-        <span class="card-arrow">Open
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- 8. 제안서 인포그래픽 프롬프트 생성기 -->
-    <a class="agent-card" data-cat="sales" href="https://maxpaek-byte.github.io/Infographic/" target="_blank" rel="noopener">
-      <div class="card-head">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <rect x="3" y="3" width="18" height="18" rx="2" stroke-linejoin="round"/>
-            <path d="M3 9H21M9 21V9" stroke-linejoin="round"/>
-            <path d="M14 13L16 15L19 12" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <span class="card-status status-live">Live</span>
-      </div>
-      <div class="card-title">제안서 인포그래픽 프롬프트 생성기</div>
-      <div class="card-desc">제안서·보고서용 인포그래픽 제작 프롬프트를 자동 생성. 12pt 가독성 기준 준수.</div>
-      <div class="card-foot">
-        <span class="card-tag">Sales Support</span>
-        <span class="card-arrow">Open
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- 8. Top 50 Gen AI Product -->
-    <a class="agent-card" data-cat="resource" href="https://maxpaek-byte.github.io/ai-bookmarks/" target="_blank" rel="noopener">
-      <div class="card-head">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 3H18V21L12 17L6 21V3Z" stroke-linejoin="round"/>
-            <path d="M9 9L11 11L15 7" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <span class="card-status status-live">Live</span>
-      </div>
-      <div class="card-title">Top 50 Gen AI Product</div>
-      <div class="card-desc">글로벌 생성형 AI 상위 50개 제품을 큐레이션. SKF AI Resource Hub의 핵심 카탈로그.</div>
-      <div class="card-foot">
-        <span class="card-tag">AI Resource</span>
-        <span class="card-arrow">Open
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- 10. SDW AI Agent -->
-    <a class="agent-card" data-cat="content" href="https://ai.snowflake.com/skf/abskf01/#/ai" target="_blank" rel="noopener">
-      <div class="card-head">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 7L12 3L21 7V17L12 21L3 17V7Z" stroke-linejoin="round"/>
-            <path d="M3 7L12 11L21 7M12 11V21" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <span class="card-status status-live">Live</span>
-      </div>
-      <div class="card-title">SDW AI Agent</div>
-      <div class="card-desc">
-        <p>기존 PBI 보고서로는 파악하기 어려운 통찰을, 트렌드 분석부터 세부 분석까지 폭넓게 제공합니다.</p>
-        <p>SDW AI Agent 접근 권한은 ServiceNow 포털을 통해 신청하세요. <span class="card-link" onclick="event.preventDefault(); event.stopPropagation(); window.open('https://skfprod.service-now.com/sp', '_blank');">ServiceNow 신청 링크</span></p>
-      </div>
-      <div class="card-foot">
-        <span class="card-tag">Productivity</span>
-        <span class="card-arrow">Open
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-    </a>
-
+  <!-- Content area: loading / error / grid -->
+  <div id="content">
+    <div class="skeleton-grid">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
   </div>
 
   <!-- Footer -->
@@ -708,24 +524,213 @@ body {
 </div>
 
 <script>
-// Filter logic
-const chips = document.querySelectorAll('.filter-chip');
-const cards = document.querySelectorAll('.agent-card');
+/* =========================================================
+   Icon library — semantic name → SVG path content
+   ========================================================= */
+const ICONS = {
+  'airplane':       '<path d="M2 12L22 5L15 22L12 14L4 11L2 12Z" stroke-linejoin="round"/><path d="M12 14L19 7" stroke-linecap="round"/>',
+  'document-split': '<path d="M14 3H6C5 3 4 4 4 5V19C4 20 5 21 6 21H18C19 21 20 20 20 19V9L14 3Z" stroke-linejoin="round"/><path d="M14 3V9H20" stroke-linejoin="round"/><path d="M8 13H16M8 17H13" stroke-linecap="round"/>',
+  'leaf':           '<path d="M12 3C8 7 5 10 5 14C5 18 8 21 12 21C16 21 19 18 19 14C19 10 16 7 12 3Z" stroke-linejoin="round"/><path d="M12 21V11M12 14L9 12M12 17L15 15" stroke-linecap="round"/>',
+  'chat-bubble':    '<path d="M21 12C21 16 17 19 12 19C10.8 19 9.6 18.8 8.6 18.5L4 20L5.5 16C4.6 14.8 4 13.5 4 12C4 8 8 5 12 5C17 5 21 8 21 12Z" stroke-linejoin="round"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="13" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="17" cy="12" r="1" fill="currentColor" stroke="none"/>',
+  'chart-bar':      '<path d="M4 20H20M6 16V10M10 16V6M14 16V12M18 16V8" stroke-linecap="round" stroke-linejoin="round"/>',
+  'document-page':  '<path d="M4 5H20V19H4V5Z" stroke-linejoin="round"/><path d="M8 8H16M8 12H16M8 16H12" stroke-linecap="round"/>',
+  'speech-bubble':  '<path d="M4 4H20V16H12L8 20V16H4V4Z" stroke-linejoin="round"/><path d="M8 10H16M8 14H13" stroke-linecap="round"/>',
+  'layout-grid':    '<rect x="3" y="3" width="18" height="18" rx="2" stroke-linejoin="round"/><path d="M3 9H21M9 21V9" stroke-linejoin="round"/><path d="M14 13L16 15L19 12" stroke-linecap="round" stroke-linejoin="round"/>',
+  'bookmark':       '<path d="M6 3H18V21L12 17L6 21V3Z" stroke-linejoin="round"/><path d="M9 9L11 11L15 7" stroke-linecap="round" stroke-linejoin="round"/>',
+  'package':        '<path d="M3 7L12 3L21 7V17L12 21L3 17V7Z" stroke-linejoin="round"/><path d="M3 7L12 11L21 7M12 11V21" stroke-linejoin="round"/>',
+  'lightbulb':      '<path d="M9 18H15M10 21H14M12 3C8 3 6 6 6 9C6 11 7 12.5 8 13.5C9 14.5 9 15 9 16H15C15 15 15 14.5 16 13.5C17 12.5 18 11 18 9C18 6 16 3 12 3Z" stroke-linecap="round" stroke-linejoin="round"/>',
+  'compass':        '<path d="M4 21V19C4 16 7 14 12 14C17 14 20 16 20 19V21" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="8" r="4"/>',
+  'default':        '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9H15M9 13H15M9 17H13"/>'
+};
 
-chips.forEach(chip => {
-  chip.addEventListener('click', () => {
-    chips.forEach(c => c.classList.remove('active'));
-    chip.classList.add('active');
-    const f = chip.dataset.filter;
-    cards.forEach(card => {
-      if (f === 'all' || card.dataset.cat === f) {
-        card.classList.remove('hidden');
-      } else {
-        card.classList.add('hidden');
-      }
+/* =========================================================
+   Status → CSS class mapping
+   ========================================================= */
+const STATUS_CLASS = {
+  'Live':        'status-live',
+  'M365':        'status-m365',
+  'Beta':        'status-live',
+  'Alpha':       'status-live',
+  'Coming Soon': 'status-soon',
+  'Sunset':      'status-soon',
+  'Deprecated':  'status-soon'
+};
+
+/* =========================================================
+   Helpers
+   ========================================================= */
+const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({
+  '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+}[c]));
+
+const iconSvg = (name) => `
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    ${ICONS[name] || ICONS['default']}
+  </svg>`;
+
+/* =========================================================
+   Description renderer
+   - 단일 단락이면 plain text, 여러 단락이면 <p> wrapping
+   - extra_action이 있으면 마지막 단락 끝에 인라인 링크 추가
+   ========================================================= */
+function renderDescription(app) {
+  const desc = app.description || '';
+  const paragraphs = desc.includes('\n\n')
+    ? desc.split('\n\n').map(p => p.trim()).filter(Boolean)
+    : [desc];
+
+  // 단일 단락 + extra_action 없음 → 평문
+  if (paragraphs.length === 1 && !app.extra_action) {
+    return escapeHtml(paragraphs[0]);
+  }
+
+  // 다단락 또는 extra_action 있음 → <p> wrapping
+  return paragraphs.map((p, i) => {
+    const isLast = i === paragraphs.length - 1;
+    if (isLast && app.extra_action) {
+      const ea = app.extra_action;
+      const safeUrl = escapeHtml(ea.url);
+      const safeText = escapeHtml(ea.text);
+      const link = `<span class="card-link" onclick="event.preventDefault(); event.stopPropagation(); window.open('${safeUrl}', '_blank');">${safeText}</span>`;
+      return `<p>${escapeHtml(p)} ${link}</p>`;
+    }
+    return `<p>${escapeHtml(p)}</p>`;
+  }).join('');
+}
+
+/* =========================================================
+   Card renderer
+   ========================================================= */
+function renderCard(app) {
+  const hasLink = !!app.url && app.status !== 'Coming Soon';
+  const statusClass = STATUS_CLASS[app.status] || 'status-soon';
+  const tag = hasLink ? 'a' : 'div';
+  const linkAttrs = hasLink
+    ? `href="${escapeHtml(app.url)}" target="_blank" rel="noopener"`
+    : '';
+  const disabledCls = hasLink ? '' : ' disabled';
+  const arrowLabel = hasLink ? 'Open' : 'Soon';
+  const arrowIcon = hasLink
+    ? '<svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    : '<svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7V12L15 14"/></svg>';
+
+  return `
+    <${tag} class="agent-card${disabledCls}" data-cat="${escapeHtml(app.category)}" ${linkAttrs}>
+      <div class="card-head">
+        <div class="card-icon">${iconSvg(app.icon)}</div>
+        <span class="card-status ${statusClass}">${escapeHtml(app.status)}</span>
+      </div>
+      <div class="card-title">${escapeHtml(app.name)}</div>
+      <div class="card-desc">${renderDescription(app)}</div>
+      <div class="card-foot">
+        <span class="card-tag">${escapeHtml(app.category)}</span>
+        <span class="card-arrow">${arrowLabel}${arrowIcon}</span>
+      </div>
+    </${tag}>
+  `;
+}
+
+/* =========================================================
+   Stats updater
+   ========================================================= */
+function renderStats(apps) {
+  const total = apps.length;
+  const live  = apps.filter(a => a.status === 'Live').length;
+  const m365  = apps.filter(a => a.status === 'M365' || a.platform === 'M365 Copilot Studio').length;
+  const soon  = apps.filter(a => a.status === 'Coming Soon').length;
+
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat"><div class="stat-num">${total}</div><div class="stat-label">Total</div></div>
+    <div class="stat"><div class="stat-num">${live}</div><div class="stat-label">Live</div></div>
+    <div class="stat"><div class="stat-num">${m365}</div><div class="stat-label">M365</div></div>
+    <div class="stat"><div class="stat-num">${soon}</div><div class="stat-label">Soon</div></div>
+  `;
+  document.getElementById('appBadge').textContent = `v2.0 · ${total} Agents`;
+}
+
+/* =========================================================
+   Filter chips renderer
+   ========================================================= */
+function renderFilters(apps, categoryLabels) {
+  const counts = {};
+  apps.forEach(a => { counts[a.category] = (counts[a.category] || 0) + 1; });
+
+  const bar = document.getElementById('filterBar');
+  const chips = [
+    `<div class="filter-chip active" data-filter="all">전체 <span class="count">${apps.length}</span></div>`
+  ];
+  Object.entries(counts).forEach(([cat, n]) => {
+    const label = (categoryLabels && categoryLabels[cat]) || cat;
+    chips.push(
+      `<div class="filter-chip" data-filter="${escapeHtml(cat)}">${escapeHtml(label)} <span class="count">${n}</span></div>`
+    );
+  });
+  bar.innerHTML = `<span class="filter-label">Filter</span>` + chips.join('');
+
+  const chipEls = bar.querySelectorAll('.filter-chip');
+  chipEls.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chipEls.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.filter;
+      document.querySelectorAll('.agent-card').forEach(card => {
+        if (f === 'all' || card.dataset.cat === f) card.classList.remove('hidden');
+        else card.classList.add('hidden');
+      });
     });
   });
-});
+}
+
+/* =========================================================
+   Main grid renderer
+   ========================================================= */
+function renderGrid(apps) {
+  document.getElementById('content').innerHTML = `
+    <div class="agent-grid" id="agentGrid">
+      ${apps.map(renderCard).join('')}
+    </div>`;
+}
+
+/* =========================================================
+   Error renderer
+   ========================================================= */
+function renderError(err) {
+  document.getElementById('content').innerHTML = `
+    <div class="error-box">
+      <h3>⚠ apps.json을 불러올 수 없습니다</h3>
+      <p>
+        에러: <code>${escapeHtml(err.message || String(err))}</code><br><br>
+        가능한 원인:<br>
+        1. <code>apps.json</code> 파일이 같은 폴더에 없음<br>
+        2. 로컬에서 <code>file://</code>로 열어서 브라우저가 fetch를 차단<br>
+        &nbsp;&nbsp;&nbsp;→ 해결: 터미널에서 <code>python -m http.server</code> 실행 후 <code>localhost:8000</code> 접속<br>
+        3. JSON 문법 오류 (콤마·따옴표 누락 등)
+      </p>
+    </div>`;
+  document.getElementById('appBadge').textContent = 'Error';
+}
+
+/* =========================================================
+   Bootstrap
+   ========================================================= */
+async function init() {
+  try {
+    const res = await fetch('apps.json', { cache: 'no-cache' });
+    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+    const data = await res.json();
+    if (!data.apps || !Array.isArray(data.apps)) {
+      throw new Error('apps 배열이 없습니다');
+    }
+    renderStats(data.apps);
+    renderFilters(data.apps, data.category_labels);
+    renderGrid(data.apps);
+  } catch (err) {
+    console.error(err);
+    renderError(err);
+  }
+}
+
+init();
 </script>
 
 </body>
