@@ -548,13 +548,19 @@ const ICONS = {
    ========================================================= */
 const STATUS_CLASS = {
   'Live':        'status-live',
-  'M365':        'status-m365',
   'Beta':        'status-live',
   'Alpha':       'status-live',
   'Coming Soon': 'status-soon',
   'Sunset':      'status-soon',
   'Deprecated':  'status-soon'
 };
+
+/* =========================================================
+   M365 배지 판단: platform === 'M365 Copilot Studio'
+   ========================================================= */
+function isM365(app) {
+  return app.platform === 'M365 Copilot Studio';
+}
 
 /* =========================================================
    Helpers
@@ -603,7 +609,9 @@ function renderDescription(app) {
    ========================================================= */
 function renderCard(app) {
   const hasLink = !!app.url && app.status !== 'Coming Soon';
-  const statusClass = STATUS_CLASS[app.status] || 'status-soon';
+  const m365 = isM365(app);
+  const statusClass = m365 ? 'status-m365' : (STATUS_CLASS[app.status] || 'status-soon');
+  const statusLabel = m365 ? 'M365' : app.status;
   const tag = hasLink ? 'a' : 'div';
   const linkAttrs = hasLink
     ? `href="${escapeHtml(app.url)}" target="_blank" rel="noopener"`
@@ -618,7 +626,7 @@ function renderCard(app) {
     <${tag} class="agent-card${disabledCls}" data-cat="${escapeHtml(app.category)}" ${linkAttrs}>
       <div class="card-head">
         <div class="card-icon">${iconSvg(app.icon)}</div>
-        <span class="card-status ${statusClass}">${escapeHtml(app.status)}</span>
+        <span class="card-status ${statusClass}">${escapeHtml(statusLabel)}</span>
       </div>
       <div class="card-title">${escapeHtml(app.name)}</div>
       <div class="card-desc">${renderDescription(app)}</div>
@@ -635,8 +643,8 @@ function renderCard(app) {
    ========================================================= */
 function renderStats(apps) {
   const total = apps.length;
-  const live  = apps.filter(a => a.status === 'Live').length;
-  const m365  = apps.filter(a => a.status === 'M365' || a.platform === 'M365 Copilot Studio').length;
+  const m365  = apps.filter(isM365).length;
+  const live  = apps.filter(a => a.status === 'Live' && !isM365(a)).length;
   const soon  = apps.filter(a => a.status === 'Coming Soon').length;
 
   document.getElementById('statsBar').innerHTML = `
